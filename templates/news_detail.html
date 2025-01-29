@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Latest updates and news articles on various topics">
+    <meta name="keywords" content="news, articles, updates, breaking news">
+    <title>{{ news.title }}</title>
+     <link rel="icon" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSplK-Rv4JdERmRdv_FTfuhvphtv0cY7eOdvA&s" type="image/png">
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #333;
+        }
+        header {
+            background-color: #333;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        main {
+            padding: 30px 20px;
+        }
+        figure {
+            text-align: center;
+            margin: 0;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+        figcaption {
+            font-size: 0.9em;
+            color: #777;
+            margin-top: 10px;
+        }
+        article {
+            font-size: 1.1em;
+            line-height: 1.6;
+            margin-top: 20px;
+            color: #444;
+        }
+        footer {
+            background-color: #333;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+        .contact-info {
+            display: none;
+            background-color: #fff;
+            color: #333;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            margin: 20px auto;
+            max-width: 300px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .contact-info p {
+            margin: 5px 0;
+        }
+    </style>
+    <script>
+        function toggleContactInfo() {
+            const contactInfo = document.getElementById('contact-info');
+            contactInfo.style.display = contactInfo.style.display === 'none' ? 'block' : 'none';
+        }
+    </script>
+</head>
+<body>
+
+<header>
+    <h1>{{ news.title }}</h1>
+</header>
+
+<main>
+    <figure>
+        <img src="{{ news.image.url }}" alt="{{ news.title }} image" loading="lazy">
+        <figcaption>{{ news.title }} image</figcaption>
+    </figure>
+
+    <article>
+        <p>{{ news.body }}</p>
+    </article>
+
+    <button onclick="toggleContactInfo()" style="display: block; margin: 20px auto; padding: 10px 20px; background-color: #007BFF; color: white; border: none; border-radius: 4px; cursor: pointer;">
+        Contact
+    </button>
+
+    <div id="contact-info" class="contact-info">
+        <p><strong>Instagram:</strong> <a href="https://www.instagram.com/bek._svoi?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank">@bek._svoi</a></p>
+        <p><strong>Telegram:</strong> <a href="https://t.me/beksvoi" target="_blank">@beksvoi</a></p>
+    </div>
+</main>
+
+<footer>
+    <p>&copy; 2025 Your News Website | All Rights Reserved</p>
+</footer>
+
+</body>
+</html>

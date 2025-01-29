@@ -1,0 +1,103 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} {{ category.name }} Yangiliklari {% endblock %}
+
+{% block content %}
+<section class="news-section">
+    <header>
+        <h1 class="category-title">{{ category.name }} yangiliklari</h1>
+        <p class="category-description">Eng so'nggi {{ category.name }} yangiliklari bilan tanishing!</p>
+    </header>
+
+    {% if newws_list %}
+    <ul class="spost_nav">
+        {% for news in newws_list %}
+        {% if forloop.counter > 1 %}
+        <li class="news-item">
+            <article class="media wow fadeInDown">
+                <a href="{{ news.get_absolute_url }}" class="media-left">
+                    <img alt="{{ news.title }}" src="{{ news.image.url }}" class="news-image">
+                </a>
+                <div class="media-body">
+                    <header>
+                        <a href="{{ news.get_absolute_url }}" class="catg_title">{{ news.title }}</a>
+                        <time class="news-date">{{ news.published_date|date:"d M, Y" }}</time>
+                    </header>
+                    <p class="news-snippet">{{ news.body | truncatewords:10 }}</p>
+                </div>
+            </article>
+        </li>
+        {% endif %}
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p class="no-news">Hozircha bu kategoriyada yangiliklar yo'q. Tez orada yangi kontent qo'shiladi!</p>
+    {% endif %}
+</section>
+
+<style>
+    .news-section {
+        padding: 20px;
+        background-color: #f9f9f9;
+        border-radius: 8px;
+    }
+    .category-title {
+        font-size: 2rem;
+        margin-bottom: 10px;
+        color: #d687d9; /* Tasvirdagi pushti rang */
+    }
+    .category-description {
+        font-size: 1.2rem;
+        color: #666;
+        margin-bottom: 20px;
+    }
+    .spost_nav {
+        list-style: none;
+        padding: 0;
+    }
+    .news-item {
+        margin-bottom: 20px;
+    }
+    .media {
+        display: flex;
+        align-items: flex-start;
+    }
+    .media-left {
+        margin-right: 15px;
+    }
+    .news-image {
+        max-width: 120px;
+        border-radius: 8px;
+    }
+    .media-body {
+        flex: 1;
+    }
+    .catg_title {
+        font-size: 1.4rem;
+        font-weight: bold;
+        color: #d687d9; /* Tasvirdagi pushti rang */
+        text-decoration: none;
+    }
+    .catg_title:hover {
+        text-decoration: underline;
+    }
+    .news-snippet {
+        margin: 10px 0;
+        font-size: 1rem;
+        color: #555;
+    }
+    .news-date {
+        display: block;
+        font-size: 0.9rem;
+        color: #999;
+        margin-top: 5px;
+    }
+    .no-news {
+        text-align: center;
+        font-size: 1.2rem;
+        color: #888;
+        margin-top: 20px;
+    }
+</style>
+{% endblock %}

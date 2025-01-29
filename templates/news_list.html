@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Latest updates and news articles on various topics">
+    <meta name="keywords" content="news, articles, updates, breaking news">
+    <title>News List</title>
+     <link rel="icon" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSplK-Rv4JdERmRdv_FTfuhvphtv0cY7eOdvA&s" type="image/png">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: #333;
+            color: white;
+            padding: 15px 20px;
+            text-align: center;
+            z-index: 100;
+        }
+        .container {
+            margin-top: 70px; /* to offset fixed header */
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            background: #fff;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        h1 {
+            font-size: 2.5em;
+            color: #333;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .news-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 20px;
+        }
+        .news-item {
+            position: relative;
+            background-color: #fff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .news-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+        .news-item img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+        .news-item .content {
+            padding: 20px;
+            background-color: #fff;
+        }
+        .news-item h2 {
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        .news-item a {
+            color: #007bff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .news-item p {
+            color: #666;
+            font-size: 0.95em;
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+        .load-more-btn {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background-color: #007bff;
+            color: white;
+            text-align: center;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.2em;
+            margin-top: 30px;
+            transition: background-color 0.3s ease;
+        }
+        .load-more-btn:hover {
+            background-color: #0056b3;
+        }
+        footer {
+            background-color: #333;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            font-size: 0.9em;
+            border-top: 1px solid #444;
+            margin-top: 40px;
+        }
+        footer a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 10px;
+            transition: color 0.3s ease;
+        }
+        footer a:hover {
+            color: #007bff;
+        }
+        /* Responsive design for smaller screens */
+        @media (max-width: 768px) {
+            header {
+                text-align: left;
+                padding: 10px 15px;
+            }
+            h1 {
+                font-size: 2em;
+            }
+            .news-item {
+                margin: 0 auto;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>News Website</h1>
+</header>
+
+<div class="container">
+    <h1>Latest News</h1>
+    <div class="news-list">
+        {% for news in news %}
+        <div class="news-item">
+            <img src="{{ news.image.url }}" alt="{{ news.title }} image" loading="lazy">
+            <div class="content">
+                <h2><a href="{% url 'news_detail' news.id %}">{{ news.title }}</a></h2>
+                <p>{{ news.body|truncatechars:100 }}</p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <!-- Load More Button -->
+    <button class="load-more-btn" onclick="loadMoreNews()">Load More</button>
+</div>
+
+<footer>
+    <p>&copy; 2025 Your News Website | All Rights Reserved</p>
+    <p>
+        <a href="/about">About Us</a> |
+        <a href="/contact">Contact</a> |
+        <a href="/privacy">Privacy Policy</a>
+    </p>
+</footer>
+
+<script>
+    // Example function to handle loading more news (this should be backed by server-side logic for AJAX)
+    function loadMoreNews() {
+        // Implement AJAX call to load more news here
+        alert("More news loaded!");
+    }
+</script>
+
+</body>
+</html>
