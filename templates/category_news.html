@@ -4,82 +4,126 @@
 {% block title %} {{ category.name }} Yangiliklari {% endblock %}
 
 {% block content %}
-<section class="news-section">
-    <header>
-        <h1 class="category-title">{{ category.name }} yangiliklari</h1>
-        <p class="category-description">Eng so'nggi {{ category.name }} yangiliklari bilan tanishing!</p>
-    </header>
 
-    {% if newws_list %}
-    <ul class="spost_nav">
-        {% for news in newws_list %}
-        {% if forloop.counter > 1 %}
-        <li class="news-item">
-            <article class="media wow fadeInDown">
-                <a href="{{ news.get_absolute_url }}" class="media-left">
-                    <img alt="{{ news.title }}" src="{{ news.image.url }}" class="news-image">
-                </a>
-                <div class="media-body">
+<section id="contentSection" class="news-section">
+    <div class="row">
+        <div class="col-lg-8 col-md-8 col-sm-8">
+            <div class="left_content">
+                <div class="single_page">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="#">Bosh sahifa</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">{{ category.name }} yangiliklari</li>
+                        </ol>
+                    </nav>
                     <header>
-                        <a href="{{ news.get_absolute_url }}" class="catg_title">{{ news.title }}</a>
-                        <time class="news-date">{{ news.published_date|date:"d M, Y" }}</time>
+                        <h1 class="category-title">{{ category.name }} Yangiliklari</h1>
+                        <p class="category-description">Eng so'nggi {{ category.name }} yangiliklari bilan tanishing!</p>
                     </header>
-                    <p class="news-snippet">{{ news.body | truncatewords:10 }}</p>
+                    {% if newws_list %}
+                        <ul class="news-list">
+                            {% for news in newws_list %}
+                                {% if forloop.counter > 1 %}
+                                    <li class="news-item">
+                                        <article class="media wow fadeInDown">
+                                            <a href="{{ news.get_absolute_url }}" class="media-left">
+                                                <img alt="{{ news.title }}" src="{{ news.image.url }}" class="news-image">
+                                            </a>
+                                            <div class="media-body">
+                                                <header>
+                                                    <a href="{{ news.get_absolute_url }}" class="news-title">{{ news.title }}</a>
+                                                    <time class="news-date">{{ news.published_date|date:"d M, Y" }}</time>
+                                                </header>
+                                                <p class="news-snippet">{{ news.body | truncatewords:15 }}</p>
+                                            </div>
+                                        </article>
+                                    </li>
+                                {% endif %}
+                            {% endfor %}
+                        </ul>
+                    {% else %}
+                        <p class="no-news">Hozircha bu kategoriyada yangiliklar yo'q. Tez orada yangi kontent qo'shiladi!</p>
+                    {% endif %}
                 </div>
-            </article>
-        </li>
-        {% endif %}
-        {% endfor %}
-    </ul>
-    {% else %}
-    <p class="no-news">Hozircha bu kategoriyada yangiliklar yo'q. Tez orada yangi kontent qo'shiladi!</p>
-    {% endif %}
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-4">
+            <aside class="right_content">
+                <div class="single_sidebar">
+            <h2><span>Popular Post</span></h2>
+            <ul class="spost_nav">
+              <li>
+                <div class="media wow fadeInDown"> <a href="single_page.html" class="media-left"> <img alt="" src="{% static 'images/post_img1.jpg' %}"> </a>
+                  <div class="media-body"> <a href="single_page.html" class="catg_title"> Aliquam malesuada diam eget turpis varius 1</a> </div>
+                </div>
+              </li>
+              <li>
+                <div class="media wow fadeInDown"> <a href="single_page.html" class="media-left"> <img alt="" src="{% static 'images/post_img2.jpg' %}"> </a>
+                  <div class="media-body"> <a href="single_page.html" class="catg_title"> Aliquam malesuada diam eget turpis varius 2</a> </div>
+                </div>
+              </li>
+              <li>
+                <div class="media wow fadeInDown"> <a href="single_page.html" class="media-left"> <img alt="" src="{% static 'images/post_img1.jpg' %}"> </a>
+                  <div class="media-body"> <a href="single_page.html" class="catg_title"> Aliquam malesuada diam eget turpis varius 3</a> </div>
+                </div>
+              </li>
+              <li>
+                <div class="media wow fadeInDown"> <a href="single_page.html" class="media-left"> <img alt="" src="{% static 'images/post_img2.jpg' %}"> </a>
+                  <div class="media-body"> <a href="single_page.html" class="catg_title"> Aliquam malesuada diam eget turpis varius 4</a> </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+                <div class="single_sidebar sponsor-section">
+                    <h2><span>Homiyimiz</span></h2>
+                    <a class="sponsor-link" href="https://t.me/beksvoi">
+                        <img src="{% static 'sponsor/bek.jpg' %}" alt="Sponsor">
+                    </a>
+                </div>
+            </aside>
+        </div>
+    </div>
 </section>
 
 <style>
     .news-section {
         padding: 20px;
-        background-color: #f9f9f9;
+        background: #f4f4f4;
         border-radius: 8px;
     }
     .category-title {
         font-size: 2rem;
+        color: #8a2be2;
+        font-weight: bold;
         margin-bottom: 10px;
-        color: #d687d9; /* Tasvirdagi pushti rang */
     }
     .category-description {
         font-size: 1.2rem;
         color: #666;
         margin-bottom: 20px;
     }
-    .spost_nav {
+    .news-list {
         list-style: none;
         padding: 0;
     }
     .news-item {
         margin-bottom: 20px;
-    }
-    .media {
-        display: flex;
-        align-items: flex-start;
-    }
-    .media-left {
-        margin-right: 15px;
+        padding: 15px;
+        background: white;
+        border-radius: 8px;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
     }
     .news-image {
         max-width: 120px;
         border-radius: 8px;
     }
-    .media-body {
-        flex: 1;
-    }
-    .catg_title {
+    .news-title {
         font-size: 1.4rem;
         font-weight: bold;
-        color: #d687d9; /* Tasvirdagi pushti rang */
+        color: #8a2be2;
         text-decoration: none;
     }
-    .catg_title:hover {
+    .news-title:hover {
         text-decoration: underline;
     }
     .news-snippet {
@@ -99,5 +143,30 @@
         color: #888;
         margin-top: 20px;
     }
+    .popular-posts {
+        list-style: none;
+        padding: 0;
+    }
+    .popular-title {
+        font-size: 1.2rem;
+        font-weight: bold;
+        color: #8a2be2;
+        text-decoration: none;
+    }
+    .popular-title:hover {
+        text-decoration: underline;
+    }
+    .popular-image {
+        max-width: 90px;
+        border-radius: 6px;
+    }
+    .sponsor-section {
+        text-align: center;
+    }
+    .sponsor-link img {
+        width: 100%;
+        border-radius: 8px;
+    }
 </style>
+
 {% endblock %}

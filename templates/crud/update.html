@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<div class="form-container">
+    <h2 class="form-title">Yangilikni tahrirlash</h2>
+    <p class="form-description">Iltimos, yangilikni tahrirlash va saqlash uchun kerakli o‘zgartirishlarni kiriting.</p>
+
+    <form action="" method="post" class="form" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="form-group">
+            {{ form.as_p }}
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" class="btn btn-success btn-lg">Saqlash</button>
+        </div>
+    </form>
+</div>
+
+{% endblock %}

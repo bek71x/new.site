@@ -18,13 +18,12 @@
             <div class="single_page_content"> <img class="img-center" src="{{ news.image.url }}" alt="">
               <p>{{ news.body }}</p>
               <blockquote>{{ news.body | truncatewords:40 }}</blockquote>
+              <center>
+                <a href="{% url 'update' news.slug %}"style="background: orange; color: white; border: none; padding: 10px 20px; margin: 10px; cursor: pointer; border-radius: 5px; ;"">Update</a> |
+                <a href="{% url 'delete' news.slug %}"style="background: red; color: white; border: none; padding: 10px 20px; margin: 10px; cursor: pointer; border-radius: 5px;">Delete</a>
+              </center>
               <ul>
-                <div class="telegram_link" style="display: block;">
-                  <i class="icon telegram-icon"></i>
-                  <a target="_blank" href="https://t.me/+Leabp8IdeOg5ZWMy">
-                    <span>Telegram</span> kanalimizni kuzatib boring
-                  </a>
-                </div>
+
 
                 <li>Yangilik {{ news.publish_time }} da qoyildi📌</li>
                 <li>{{ news.category }}</li>
@@ -39,11 +38,14 @@
 <!--              <h5>This is h5 title</h5>-->
 <!--              <h6>This is h6 Title</h6>-->
               <button class="btn default-btn">{{ news.publish_time }}</button>
+
 <!--              <button class="btn btn-red">Red Button</button>-->
 <!--              <button class="btn btn-yellow">Yellow Button</button>-->
 <!--              <button class="btn btn-green">Green Button</button>-->
               <button class="btn btn-blue">{{ news.category }}</button>
               <button class="btn btn-black">{{ news.title }}</button>
+              <button class="btn default-btn"<a href="https://t.me/+Leabp8IdeOg5ZWMy">Telegram kanalimizni kuzatib boring</button>
+<!--              <button class="btn default-btn"><a href="https://t.me/+Leabp8IdeOg5ZWMy"</button>-->
 <!--              <button class="btn btn-orange">Orange Button</button>-->
 
 <!--              <button class="btn btn-lime"></button>-->
@@ -62,17 +64,17 @@
               <h2>Related Post <i class="fa fa-thumbs-o-up"></i></h2>
               <ul class="spost_nav wow fadeInDown animated">
                 <li>
-                  <div class="media"> <a class="media-left" href="single_page.html"> <img src="../images/post_img1.jpg" alt=""> </a>
+                  <div class="media"> <a class="media-left" href="single_page.html"> <img src="{% static 'images/post_img1.jpg' %}" alt=""> </a>
                     <div class="media-body"> <a class="catg_title" href="single_page.html"> Aliquam malesuada diam eget turpis varius</a> </div>
                   </div>
                 </li>
                 <li>
-                  <div class="media"> <a class="media-left" href="single_page.html"> <img src="../images/post_img2.jpg" alt=""> </a>
+                  <div class="media"> <a class="media-left" href="single_page.html"> <img src="{% static 'images/post_img2.jpg' %}" alt=""> </a>
                     <div class="media-body"> <a class="catg_title" href="single_page.html"> Aliquam malesuada diam eget turpis varius</a> </div>
                   </div>
                 </li>
                 <li>
-                  <div class="media"> <a class="media-left" href="single_page.html"> <img src="../images/post_img1.jpg" alt=""> </a>
+                  <div class="media"> <a class="media-left" href="single_page.html"> <img src="{% static 'images/post_img1.jpg' %}" alt=""> </a>
                     <div class="media-body"> <a class="catg_title" href="single_page.html"> Aliquam malesuada diam eget turpis varius</a> </div>
                   </div>
                 </li>
@@ -83,12 +85,12 @@
       </div>
       <nav class="nav-slit"> <a class="prev" href="#"> <span class="icon-wrap"><i class="fa fa-angle-left"></i></span>
         <div>
-          <h3>City Lights</h3>
-          <img src="../images/post_img1.jpg" alt=""/> </div>
+          <h3>Sayt yaratuvchisi👆</h3>
+          <img src="{% static 'sponsor/bek.jpg'%}" alt=""/> </div>
         </a> <a class="next" href="#"> <span class="icon-wrap"><i class="fa fa-angle-right"></i></span>
         <div>
-          <h3>Street Hills</h3>
-          <img src="../images/post_img1.jpg" alt=""/> </div>
+          <h3>Bek yangiliklari</h3>
+          <img src="{% static 'sponsor/newslogo.webp'%}" alt=""/> </div>
         </a> </nav>
       <div class="col-lg-4 col-md-4 col-sm-4">
         <aside class="right_content">
@@ -96,22 +98,22 @@
             <h2><span>Popular Post</span></h2>
             <ul class="spost_nav">
               <li>
-                <div class="media wow fadeInDown"> <a href="single_page.html" class="media-left"> <img alt="" src="../images/post_img1.jpg"> </a>
+                <div class="media wow fadeInDown"> <a href="single_page.html" class="media-left"> <img alt="" src="{% static 'images/post_img1.jpg' %}"> </a>
                   <div class="media-body"> <a href="single_page.html" class="catg_title"> Aliquam malesuada diam eget turpis varius 1</a> </div>
                 </div>
               </li>
               <li>
-                <div class="media wow fadeInDown"> <a href="single_page.html" class="media-left"> <img alt="" src="../images/post_img2.jpg"> </a>
+                <div class="media wow fadeInDown"> <a href="single_page.html" class="media-left"> <img alt="" src="{% static 'images/post_img2.jpg' %}"> </a>
                   <div class="media-body"> <a href="single_page.html" class="catg_title"> Aliquam malesuada diam eget turpis varius 2</a> </div>
                 </div>
               </li>
               <li>
-                <div class="media wow fadeInDown"> <a href="single_page.html" class="media-left"> <img alt="" src="../images/post_img1.jpg"> </a>
+                <div class="media wow fadeInDown"> <a href="single_page.html" class="media-left"> <img alt="" src="{% static 'images/post_img1.jpg' %}"> </a>
                   <div class="media-body"> <a href="single_page.html" class="catg_title"> Aliquam malesuada diam eget turpis varius 3</a> </div>
                 </div>
               </li>
               <li>
-                <div class="media wow fadeInDown"> <a href="single_page.html" class="media-left"> <img alt="" src="../images/post_img2.jpg"> </a>
+                <div class="media wow fadeInDown"> <a href="single_page.html" class="media-left"> <img alt="" src="{% static 'images/post_img2.jpg' %}"> </a>
                   <div class="media-body"> <a href="single_page.html" class="catg_title"> Aliquam malesuada diam eget turpis varius 4</a> </div>
                 </div>
               </li>
@@ -139,22 +141,22 @@
               <div role="tabpanel" class="tab-pane" id="comments">
                 <ul class="spost_nav">
                   <li>
-                    <div class="media wow fadeInDown"> <a href="single_page.html" class="media-left"> <img alt="" src="../images/post_img1.jpg"> </a>
+                    <div class="media wow fadeInDown"> <a href="single_page.html" class="media-left"> <img alt="" src="{% static 'images/post_img2.jpg' %}"> </a>
                       <div class="media-body"> <a href="single_page.html" class="catg_title"> Aliquam malesuada diam eget turpis varius 1</a> </div>
                     </div>
                   </li>
                   <li>
-                    <div class="media wow fadeInDown"> <a href="single_page.html" class="media-left"> <img alt="" src="../images/post_img2.jpg"> </a>
+                    <div class="media wow fadeInDown"> <a href="single_page.html" class="media-left"> <img alt="" src="{% static 'images/post_img1.jpg' %}"> </a>
                       <div class="media-body"> <a href="single_page.html" class="catg_title"> Aliquam malesuada diam eget turpis varius 2</a> </div>
                     </div>
                   </li>
                   <li>
-                    <div class="media wow fadeInDown"> <a href="single_page.html" class="media-left"> <img alt="" src="../images/post_img1.jpg"> </a>
+                    <div class="media wow fadeInDown"> <a href="single_page.html" class="media-left"> <img alt="" src="{% static 'images/post_img2.jpg' %}"> </a>
                       <div class="media-body"> <a href="single_page.html" class="catg_title"> Aliquam malesuada diam eget turpis varius 3</a> </div>
                     </div>
                   </li>
                   <li>
-                    <div class="media wow fadeInDown"> <a href="single_page.html" class="media-left"> <img alt="" src="../images/post_img2.jpg"> </a>
+                    <div class="media wow fadeInDown"> <a href="single_page.html" class="media-left"> <img alt="" src="{% static 'images/post_img1.jpg' %}"> </a>
                       <div class="media-body"> <a href="single_page.html" class="catg_title"> Aliquam malesuada diam eget turpis varius 4</a> </div>
                     </div>
                   </li>
@@ -168,17 +170,16 @@
           <div class="single_sidebar wow fadeInDown">
             <h2><span>Category Archive</span></h2>
             <select class="catgArchive">
-              <option>Select Category</option>
-              <option>Life styles</option>
-              <option>Sports</option>
-              <option>Technology</option>
-              <option>Treads</option>
+              <option>Categoriya Tanlash</option>
+              {% for category in category_list %}
+              <option>{{ category.name }}</option>
+              {% endfor %}
             </select>
           </div>
           <div class="single_sidebar wow fadeInDown">
             <h2><span>Links</span></h2>
             <ul>
-              <li><a href="#">Blog</a></li>
+              <li><a href="https://t.me/+Leabp8IdeOg5ZWMy">Blog</a></li>
               <li><a href="#">Rss Feed</a></li>
               <li><a href="#">Login</a></li>
               <li><a href="#">Life &amp; Style</a></li>
@@ -190,4 +191,4 @@
   </section>
 
 
-  {% endblock %}
+{% endblock %}

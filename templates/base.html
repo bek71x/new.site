@@ -1,5 +1,4 @@
 {% load static %}
-Bek yangiliklari  ✌️
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,6 +6,7 @@ Bek yangiliklari  ✌️
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSb9m3CZmuzIUBqrQjNoJNRgnVIMLcbOj0ZQg&s" type="image/png">
 <link rel="stylesheet" type="text/css" href=" {% static  'css/bootstrap.min.css' %}">
 <link rel="stylesheet" type="text/css" href="{% static 'css/font-awesome.min.css' %}">
 <link rel="stylesheet" type="text/css" href="{% static 'css/animate.css' %}">
@@ -36,10 +36,31 @@ Bek yangiliklari  ✌️
               <li><a href="../">Bosh Saxifa</a></li>
               <li><a href="#">About</a></li>
               <li><a href="{% url 'contact' %}">Contact</a></li>
+<!--              <li><a href="{% url 'login' %}">Login</a></li>-->
             </ul>
           </div>
-          <div class="header_top_right">
-            <p> 29.01.2025 </p>
+          <div class="header_top_right" style="display: flex; align-items: right; justify-content: center;">
+            {% if request.user.is_authenticated %}
+              <form action="{% url 'logout' %}" method="post">
+                {% csrf_token %}
+                <a href="{% url 'profile' %}"
+                  style="background-color: #007bff; color: white; border: none; padding: 14px 18px;
+                  font-size: 16px; border-radius: 17px; cursor: pointer; text-decoration: none; transition: 0.3s;">
+                  Profile
+                </a> |
+                <button type="submit"
+                  style="background-color: #FF0000; color: white; border: none; padding: 13px 18px;
+                  font-size: 15px; border-radius: 15px; cursor: pointer; text-decoration: none; transition: 0.3s;">
+                  Logout
+                </button>
+              </form>
+            {% else %}
+              <a href="{% url 'login' %}"
+                style="background-color: #007bff; color: white; border: none; padding: 13px 18px;
+                font-size: 15px; border-radius: 15px; cursor: pointer; text-decoration: none; transition: 0.3s;">
+                Login
+              </a>
+            {% endif %}
           </div>
         </div>
       </div>
@@ -58,7 +79,7 @@ Bek yangiliklari  ✌️
       </div>
       <div id="navbar" class="navbar-collapse collapse">
         <ul class="nav navbar-nav main_nav">
-          <li class="active"><a href="index.html"><span class="fa fa-home desktop-home"></span><span class="mobile-show">Home</span></a></li>
+          <li class="active"><a href="../"><span class="fa fa-home desktop-home"></span><span class="mobile-show">Home</span></a></li>
           {% for category in category_list %}
           <li><a href="{% url 'category_link' category.id %}">{{ category.name }}</a></li>
           {% endfor %}
@@ -73,10 +94,12 @@ Bek yangiliklari  ✌️
               <li><a href="https://www.instagram.com/bek._svoi?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==">Instagram</a></li>
               <li><a href="https://muydinbaevb@gmail.com">Email</a></li>
               <li><a href="https://www.youtube.com/channel/UCm5zOPOtqEiua73ej4jJnIw">Youtube kanal</a></li>
-<!--              <li><a href="#">Sympony</a></li>                                                                                                                               li>-->
+              <li><a href="https://x.com/Beksvoi">X (twitter)</a></li>                                                                                                                               li>
             </ul>
           </li>
-<!--          <li><a href="#">Sport</a></li>-->
+          {% if request.user.is_authenticated %}
+          <li><a href="{% url 'create' %}"style="background: blue; color;white">Create News</a></li>
+          {% endif %}
 <!--          <li><a href="#">Tablets</a></li>-->
 <!--          <li><a href="pages/contact.html">Contact Us</a></li>-->
 <!--          <li><a href="pages/404.html">404 Page</a></li>-->
@@ -104,7 +127,7 @@ Bek yangiliklari  ✌️
           <div class="social_area">
             <ul class="social_nav">
               <li class="facebook"><a href="#"></a></li>
-              <li class="twitter"><a href="#"></a></li>
+              <li class="twitter"><a href="https://x.com/Beksvoi"></a></li>
               <li class="flickr"><a href="https://www.instagram.com/bek._svoi?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="></a></li>
               <li class="pinterest"><a href="#"></a></li>
               <li class="googleplus"><a href="#"></a></li>
@@ -141,17 +164,22 @@ Bek yangiliklari  ✌️
 <!--              <li><a href="#">Siyosiy</a></li>-->
 <!--              <li><a href="#">Avto</a></li>-->
 <!--              <li><a href="#">Texnologiya</a></li>-->
-              <li><a href="contact/">Contact</a></li>
+<!--              <li><a href="../contact/">Contact</a></li>-->
             </ul>
           </div>
         </div>
         <div class="col-lg-4 col-md-4 col-sm-4">
           <div class="footer_widget wow fadeInRightBig">
-            <h2>Contact</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-            <address>
-            Perfect News,1238 S . 123 St.Suite 25 Town City 3333,USA Phone: 123-326-789 Fax: 123-546-567
-            </address>
+            <h2>Contact me</h2>
+            <ul class="tag_nav">
+              <li><a href="https://www.instagram.com/bek._svoi?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==">Instagram</a></li>
+              <li><a href="https://t.me/beksvoi">Telegram</a></li>
+              <li><a href="https://www.youtube.com/channel/UCm5zOPOtqEiua73ej4jJnIw">Youtube</a></li>
+              <li><a href="https://t.me/+Leabp8IdeOg5ZWMy">Telegram kanal</a></li>
+              <li><a href="https://muydinbaevb@gmail.com">Email</a></li>
+              <li><a href="../contact/">Contact bolimi</a></li>
+              <h6>Tel:+998 93 333 77 77</h6>
+            </ul>
           </div>
         </div>
       </div>

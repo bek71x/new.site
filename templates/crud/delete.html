@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<div style="max-width: 500px; margin: 50px auto; text-align: center; padding: 20px; border: 1px solid #ddd; border-radius: 8px;">
+    <h2 style="color: red;">⚠️ Yangilikni o‘chirish</h2>
+    <p><strong>"{{ news.title }}"</strong> ni o‘chirmoqchimisiz?</p>
+    <form action="" method="post">
+        {% csrf_token %}
+        <button type="submit" style="background: red; color: white; border: none; padding: 10px 20px; margin: 10px; cursor: pointer; border-radius: 5px;">
+            🗑️ Ha, o‘chirish!
+        </button>
+        <a href="{% url 'news_detail' news.slug %}" style="background: gray; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;">
+            ❌ Bekor qilish
+        </a>
+    </form>
+</div>
+
+{% endblock %}

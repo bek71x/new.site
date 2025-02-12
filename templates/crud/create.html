@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="card shadow-lg p-4">
+        <h2 class="text-center mb-3">Yangilik qo‘shish</h2>
+        <p class="text-muted text-center">Iltimos, yangi yangilikni kiritish uchun quyidagi formani to‘ldiring.</p>
+
+        <form method="post" enctype="multipart/form-data" class="mt-3">
+            {% csrf_token %}
+
+            <div class="mb-3">
+                {{ form.as_p }}
+            </div>
+
+            <div class="d-flex justify-content-center">
+                <button type="submit" class="btn btn-success btn-lg"> ➕ Yangilikni qo‘shish</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
