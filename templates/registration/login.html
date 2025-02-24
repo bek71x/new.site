@@ -101,8 +101,10 @@
         <button type="submit">Kirish</button>
     </form>
     <div class="forgot-password">
-<!--        <button ></button>-->
         <a href="{% url 'password_reset' %}">Parolni unutdingizmi?</a>
+    </div>
+    <div class="forgot-password">
+        <a href="{% url 'user_register' %}">Akkauntingiz yoqmi?</a>
     </div>
 </div>
 {% endblock %}

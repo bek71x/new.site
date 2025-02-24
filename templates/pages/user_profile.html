@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-lg">
+                <h2 class="text-center mt-3">Foydalanuvchi Profil Sahifasi</h2>
+                <div class="card-body">
+                    <div class="text-center mb-4">
+                        {% if user.profile.photo %}
+                            <img src="{{ user.profile.photo.url }}" alt="User Avatar" class="profile-img">
+                        {% else %}
+                            <img src="{% static 'sponsor/default-avatar.png' %}" alt="User Avatar" class="profile-img">
+                        {% endif %}
+                    </div>
+                    <h4 class="text-center"><strong>Salom, {{ user.username }}!</strong></h4>
+                    <hr>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            <strong>Ism:</strong> {{ user.first_name }}
+                        </li>
+                        <li class="list-group-item">
+                            <strong>Familiya:</strong> {{ user.last_name }}
+                        </li>
+                        <li class="list-group-item">
+                            <strong>Email:</strong> {{ user.email }}
+                        </li>
+                    </ul>
+                </div>
+                <div class="card-footer text-center">
+                    <a href="{% url 'edit_user_information' %}" class="btn btn-primary btn-lg me-2">Profilni o'zgartirish</a>
+                    <a href="{% url 'password_change' %}" class="btn btn-success btn-lg">Parolni o'zgartirish</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    body {
+        background-color: #f8f9fa;
+    }
+    .card {
+        border-radius: 20px;
+    }
+    .card-header {
+        font-size: 28px;
+        font-weight: bold;
+    }
+    .btn {
+        border-radius: 25px;
+    }
+    .list-group-item {
+        font-size: 18px;
+    }
+    .profile-img {
+        width: 150px; /* Rasm o‘lchamini kichikroq qilish */
+        height: 150px;
+        border-radius: 50%; /* Rasmi to‘g‘ri dumaloq qilish */
+        object-fit: cover; /* Rasm nisbatini saqlab qirqish */
+        border: 3px solid #007bff; /* Istalgan rangda chegarani qo‘shish */
+    }
+</style>
+{% endblock %}

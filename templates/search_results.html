@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% block title %}Qidiruv natijalari {% endblock %}
+
+{% block content %}
+
+
+
+  <section id="contentSection">
+    <div class="row">
+      <div class="col-lg-8 col-md-8 col-sm-8">
+        <div class="left_content">
+          <div class="contact_area">
+            <h2>Qidiruv natijalari</h2>
+              <ul class="spost_nav">
+
+                {% if barcha_yangiliklar %}
+                    {% for local in barcha_yangiliklar %}
+                        <li>
+                            <div class="media wow fadeInDown">
+                                <a href="{{ local.get_absolute_url }}" class="media-left">
+                                    <img alt="" src="{{ local.image.url }}">
+                                </a>
+                                <div class="media-body">
+                                    <a href="{{ local.get_absolute_url }}" class="catg_title">{{ local.title | truncatewords:4 }}</a>
+                                    <p>{{ local.body | truncatewords:20 }}</p>
+                                </div>
+                            </div>
+                        </li>
+                    {% endfor %}
+                {% else %}
+                    <p>Hech narsa topilmadi</p>
+                {% endif %}
+
+              </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+{% endblock content %}

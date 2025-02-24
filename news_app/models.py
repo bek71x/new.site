@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.urls import reverse
 from django.utils import timezone
 from django.db import models
@@ -14,6 +15,9 @@ class News(models.Model):
     class Status(models.TextChoices):
         Draft = 'DF', 'Draft'
         Published = 'PB', 'Publish'
+
+    class News(models.Model):
+        views = models.PositiveIntegerField(default=0)
 
     title = models.CharField(max_length=250)
     slug = models.SlugField(max_length=250)
@@ -40,3 +44,18 @@ class News(models.Model):
 
 class Photos(models.Model):
     image = models.ImageField(upload_to='photos/images')
+
+
+class Comment(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='comments')
+    news = models.ForeignKey(News, on_delete=models.CASCADE, related_name='comments')
+    body = models.TextField()
+    created = models.DateTimeField(auto_now_add=True)
+    active = models.BooleanField(default=True)
+
+
+    class Meta:
+        ordering = ['-created']
+
+    def __str__(self):
+        return f"{self.user} {self.news} {self.body}"

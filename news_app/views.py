@@ -1,14 +1,19 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy
-from django.views.generic import UpdateView, DeleteView, CreateView
+from django.views import View
+from django.views.generic import UpdateView, DeleteView, CreateView, ListView
 from unicodedata import category
-
-from .models import News, Photos, Category
+from django.db.models import Q
+from .forms import CommentForm
+from .models import News, Photos, Category, Comment
+from hitcount.utils import get_hitcount_model
+from hitcount.views import HitCountMixin
 
 
 def news_list_view(request):
     newslar=News.objects.all()
     lastest_news = News.objects.all().order_by('-created_time')[:5]
+    all_news = News.objects.all().order_by('-created_time')
     local_news = News.objects.filter(category__name ='Mahalliy').order_by('-created_time')[:5]
     techno_news = News.objects.filter(category__name ='Texnologiya').order_by('-created_time')[:5]
     iqsodiy_news = News.objects.filter(category__name ='Iqsodiyot').order_by('-created_time')[:5]
@@ -21,6 +26,7 @@ def news_list_view(request):
     context ={
         'news_list': newslar,
         'lastest_news': lastest_news,
+        'all_news':all_news,
         'local_news': local_news,
         'techno_news': techno_news,
         'iqsodiy_news': iqsodiy_news,
@@ -34,14 +40,54 @@ def news_list_view(request):
     return render(request,'index.html',context)
 
 
-def news_detail_view(request,news):
-    new = News.objects.get(slug = news)
+
+def news_detail_view(request, news):
+    new = get_object_or_404(News, slug=news, status=News.Status.Published)
+
+    context = {}
+
+    hit_count = get_hitcount_model().objects.get_for_object(new)
+    hits = hit_count.hits
+    hitcontext = context['hitcount'] = {'pk': hit_count.pk}
+    hit_count_response = HitCountMixin.hit_count(request, hit_count)
+    if hit_count_response.hit_counted:
+        hits = hits + 1
+        hitcontext['hit_counted'] = hit_count_response.hit_counted
+        hitcontext['hit_message'] = hit_count_response.hit_message
+        hitcontext['total_hits'] = hits
+
+    if request.method == "POST":
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.news = new
+            comment.user = request.user
+            comment.save()
+            return redirect('news_detail', news=new.slug)
+
+    else:
+        form = CommentForm()
+
+    comments = new.comments.filter(active=True)
+    new_comment = None
+    comment_count = len(comments)
+
+    three_news = News.objects.filter(
+        category__name=new.category.name,
+        status=News.Status.Published
+    ).exclude(id=new.id)[:3]
+
     category_list = Category.objects.all()
+
     context = {
-        'news':new,
-        'category_list':category_list,
+        'news': new,
+        'category_list': category_list,
+        'three_news': three_news,
+        'form': form,
+        'comments': comments
     }
-    return render(request,'single_page.html',context)
+    return render(request, 'single_page.html', context)
+
 
 
 def contact_view(request):
@@ -68,11 +114,14 @@ def category_list(request):
 
     return render(request, 'base.html', {'category_list': category_list})
 
+
+
+
 class NewsUpdateview(UpdateView):
     model = News
     template_name = 'crud/update.html'
     fields = ['title','slug','body','category','image','status']
-    # form_class = NewsUpdateForm()
+
 
 class NewsDeleteview(DeleteView):
     model = News
@@ -84,3 +133,16 @@ class NewsCreateview(CreateView):
     fields = ['title', 'slug', 'body', 'category', 'image', 'status']
     template_name = 'crud/create.html'
     success_url = reverse_lazy('news_list')
+
+class SearchResultsList(ListView):
+    model = News
+    template_name = 'search_results.html'
+    context_object_name = 'barcha_yangiliklar'
+
+
+    def get_queryset(self):
+        query = self.request.GET.get('q')
+        return News.objects.filter(
+            Q(title__icontains=query) | Q(body__icontains=query)
+        )
+

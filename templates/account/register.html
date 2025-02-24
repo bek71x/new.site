@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Akkaunt Yaratish{% endblock %}
+
+{% block content %}
+<style>
+    body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        font-family: Arial, sans-serif;
+        margin: 0;
+        background: #f3f4f6;
+    }
+
+    .register-container {
+        background: #fff;
+        border-radius: 16px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        width: 100%;
+        max-width: 500px;
+        padding: 30px;
+    }
+
+    .register-container h2 {
+        text-align: center;
+        margin-bottom: 20px;
+        color: #333;
+    }
+
+    .register-container label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: bold;
+        color: #555;
+    }
+
+    .register-container input {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        margin-bottom: 20px;
+        font-size: 14px;
+        transition: border-color 0.3s;
+    }
+
+    .register-container input:focus {
+        border-color: #4a90e2;
+        outline: none;
+    }
+
+    .register-container button {
+        width: 100%;
+        padding: 12px;
+        background: #4a90e2;
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background 0.3s;
+    }
+
+    .register-container button:hover {
+        background: #357ABD;
+    }
+
+    .login-redirect {
+        text-align: center;
+        margin-top: 15px;
+    }
+
+    .login-redirect a {
+        color: #4a90e2;
+        text-decoration: underline;
+        font-size: 14px;
+    }
+
+    .login-redirect a:hover {
+        color: #357ABD;
+    }
+</style>
+<div class="register-container">
+    <h2>Akkaunt Yaratish</h2>
+    <form method="POST" action="">
+        {% csrf_token %}
+        {{ user_form }}
+        <button type="submit">Akkaunt Yaratish</button>
+    </form>
+    <div class="login-redirect">
+        <p>Allaqachon akkauntingiz bormi? <a href="{% url 'login' %}">Tizimga kiring</a>.</p>
+    </div>
+</div>
+{% endblock %}

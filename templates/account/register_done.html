@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Muvaffaqiyatli roʻyxatdan oʻtdingiz{% endblock title %}
+
+{% block content %}
+<div class="container d-flex flex-column align-items-center justify-content-center vh-100">
+    <div class="card shadow-lg p-4 text-center" style="max-width: 400px; border-radius: 15px;">
+        <h1 class="text-success mb-3"> {{ new_user.first_name }}, tabriklaymiz!</h1>
+        <p class="lead text-muted">Siz muvaffaqiyatli roʻyxatdan oʻtdingiz.</p>
+        <a href="{% url 'login' %}" class="btn btn-lg btn-primary mt-3" style="border-radius: 10px;">🔑 Kirish</a>
+    </div>
+</div>
+{% endblock content %}
