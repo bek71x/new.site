@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% load static %}
+{% load i18n %}
 {% block title %}Qidiruv natijalari {% endblock %}
 
 {% block content %}
@@ -12,7 +13,7 @@
       <div class="col-lg-8 col-md-8 col-sm-8">
         <div class="left_content">
           <div class="contact_area">
-            <h2>Qidiruv natijalari</h2>
+            <h2>{% blocktrans %} Qidiruv natijalari {% endblocktrans %}</h2>
               <ul class="spost_nav">
 
                 {% if barcha_yangiliklar %}
@@ -30,7 +31,7 @@
                         </li>
                     {% endfor %}
                 {% else %}
-                    <p>Hech narsa topilmadi</p>
+                    <p> {% blocktrans %} Hech narsa topilmadi {% endblocktrans %}</p>
                 {% endif %}
 
               </ul>

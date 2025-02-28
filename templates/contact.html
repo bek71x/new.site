@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% load static %}
-
+{% load i18n %}
 {% block content %}
 
   <section id="contentSection">
@@ -9,13 +9,13 @@
       <div class="col-lg-8 col-md-8 col-sm-8">
         <div class="left_content">
           <div class="contact_area">
-            <h2>Biz Bilan Boglash</h2>
-            <p> Biz Bilan Boglash murojatinggizni pastga yozing biz sizning sorovinggizni korib chiqamiz✨💻</p>
+            <h2>{% blocktrans %} Biz Bilan Boglash {% endblocktrans %}</h2>
+            <p>  {% blocktrans %} Biz Bilan Boglash murojatinggizni pastga yozing biz sizning sorovinggizni korib chiqamiz {% endblocktrans %}✨💻</p>
             <form action="#" class="contact_form">
               <input class="form-control" type="text" placeholder="Ismingiz*">
               <input class="form-control" type="email" placeholder="Emailingiz*">
               <textarea class="form-control" cols="30" rows="10" placeholder="Murojatinggiz yoki Xabaringgiz*"></textarea>
-              <input type="submit" value="Xabarni yuborish">
+              <input type="submit" value="Xabarni yuborish📤">
             </form>
           </div>
         </div>

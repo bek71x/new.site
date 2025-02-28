@@ -1,4 +1,5 @@
 {% load static %}
+{% load i18n %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -33,47 +34,88 @@
         <div class="header_top">
           <div class="header_top_left">
             <ul class="top_nav">
-              <li><a href="{% url 'news_list' %}">Bosh Saxifa</a></li>
-<!--              <li><a href="#">About</a></li>-->
-              <li><a href="{% url 'contact' %}">Biz Bilan Boglash</a></li>
-<!--              <li><a href="{% url 'login' %}">Login</a></li>-->
+              <li><a href="{% url 'news_list' %}">{% blocktrans %} Bosh Saxifa {% endblocktrans %}</a></li>
+              <li><a href="{% url 'contact' %}"> {% blocktrans %} Biz Bilan Boglash {% endblocktrans %} </a></li>
             </ul>
           </div>
-          <div class="header_top_right" style="display: flex; align-items: right; justify-content: center;">
+            <style>
+              .btn {
+                  padding: 10px 16px;
+                  font-size: 18px;
+                  border-radius: 8px;
+                  cursor: pointer;
+                  text-decoration: none;
+                  border: none;
+                  transition: 0.3s;
+                  font-weight: 500;
+              }
+
+              .btn-primary {
+                  background-color: #007bff;
+                  color: white;
+              }
+
+              .btn-primary:hover {
+                  background-color: #0056b3;
+              }
+
+              .btn-success {
+                  background-color: #28a745;
+                  color: white;
+              }
+
+              .btn-success:hover {
+                  background-color: #1e7e34;
+              }
+
+              .btn-danger {
+                  background-color: #dc3545;
+                  color: white;
+              }
+
+              .btn-danger:hover {
+                  background-color: #bd2130;
+              }
+
+              .header_top_right {
+                  display: flex;
+                  align-items: center;
+                  gap: 18px;
+              }
+
+              .header_top_right form {
+                  display: flex;
+                  align-items: right;
+                  gap: 18px;
+              }
+            </style>
+
+        <div class="header_top_right">
             {% if request.user.is_superuser %}
-                <a href="{% url 'admin_page' %}"
-                  style="background-color: #008000; color: white; border: none; padding: 14px 18px;
-                  font-size: 16px; border-radius: 17px; cursor: pointer; text-decoration: none; transition: 0.3s;">
-                  Profile admin
+                <a href="{% url 'admin_page' %}" class="btn btn-success">
+                    Profile Admin
                 </a>
-            {% endif %}|
-            {% if request.user.is_authenticated %}
-              <form action="{% url 'logout' %}" method="post">
-                {% csrf_token %}
-                <a href="{% url 'user_profile' %}"
-                  style="background-color: #007bff; color: white; border: none; padding: 14px 18px;
-                  font-size: 16px; border-radius: 17px; cursor: pointer; text-decoration: none; transition: 0.3s;">
-                  Profile
-                </a>
-                <button type="submit"
-                  style="background-color: #FF0000; color: white; border: none; padding: 13px 18px;
-                  font-size: 15px; border-radius: 15px; cursor: pointer; text-decoration: none; transition: 0.3s;">
-                  Logout
-                </button>
-              </form>
-            {% else %}
-              <a href="{% url 'login' %}"
-                style="background-color: #007bff; color: white; border: none; padding: 13px 18px;
-                font-size: 15px; border-radius: 15px; cursor: pointer; text-decoration: none; transition: 0.3s;">
-                Login
-              </a>|
-            <a href="{% url 'user_register' %}"
-                style="background-color: #008000; color: white; border: none; padding: 13px 18px;
-                font-size: 15px; border-radius: 15px; cursor: pointer; text-decoration: none; transition: 0.3s;">
-                Sign
-              </a>
             {% endif %}
-          </div>
+
+            {% if request.user.is_authenticated %}
+                <form action="{% url 'logout' %}" method="post">
+                    {% csrf_token %}
+                    <a href="{% url 'user_profile' %}" class="btn btn-primary">
+                        Profile
+                    </a>
+                    <button type="submit" class="btn btn-danger">
+                        Logout
+                    </button>
+                </form>
+            {% else %}
+                <a href="{% url 'login' %}" class="btn btn-primary">
+                    Login
+                </a>
+                <a href="{% url 'user_register' %}" class="btn btn-success">
+                    Sign Up
+                </a>
+            {% endif %}
+        </div>
         </div>
       </div>
       <div class="col-lg-12 col-md-12 col-sm-12">
@@ -93,25 +135,50 @@
         <ul class="nav navbar-nav main_nav">
           <li class="active"><a href="{% url 'news_list' %}"><span class="fa fa-home desktop-home"></span><span class="mobile-show">Home</span></a></li>
           {% for category in category_list %}
-          <li><a href="{% url 'category_link' category.id %}">{{ category.name }}</a></li>
+          <li><a href="{% url 'category_link' category.id %}">  {{ category.name }}  </a></li>
           {% endfor %}
           <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Contact</a>
             <ul class="dropdown-menu" role="menu">
-              <li><a href="https://t.me/beksvoi">Telegram</a></li>
-              <li><a href="https://t.me/+Leabp8IdeOg5ZWMy">Telegram kanal</a></li>
+              <li><a href="https://t.me/beksvoi"> Telegram</a></li>
+              <li><a href="https://t.me/+Leabp8IdeOg5ZWMy"> {% blocktrans %} Telegram kanal {% endblocktrans %} </a></li>
               <li><a href="https://www.instagram.com/bek._svoi?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==">Instagram</a></li>
               <li><a href="https://muydinbaevb@gmail.com">Email</a></li>
-              <li><a href="https://www.youtube.com/channel/UCm5zOPOtqEiua73ej4jJnIw">Youtube kanal</a></li>
+              <li><a href="https://www.youtube.com/channel/UCm5zOPOtqEiua73ej4jJnIw"> {% blocktrans %} Youtube kanal {% endblocktrans %}</a></li>
               <li><a href="https://x.com/Beksvoi">X (twitter)</a></li>                                                                                                                               li>
             </ul>
           </li>
           {% if request.user.is_superuser %}
-          <li><a href="{% url 'create' %}"style="background: blue; color;white">Create News</a></li>
+          <li><a href="{% url 'create' %}"style="background: blue; color;white">Create News
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-square-fill" viewBox="0 0 16 16">
+            <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm6.5 4.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3a.5.5 0 0 1 1 0"/>
+          </svg>
+          </a></li>
           {% endif %}
-          <li>
+            <li>
                 <form method="get" action="{% url 'search_results' %}">
                     <input type="search" name="q" placeholder="Qidiruv..." class="form-control">
                 </form>
+            </li>
+
+          <li>
+
+            <form action="{% url 'set_language' %}" method="post">{% csrf_token %}
+                <input name="next" type="hidden" value="{{ redirect_to }}">
+                <select name="language">
+                    {% get_current_language as LANGUAGE_CODE %}
+                    {% get_available_languages as LANGUAGES %}
+                    {% get_language_info_list for LANGUAGES as languages %}
+                    {% for language in languages %}
+                        <option value="{{ language.code }}"
+                                {% if language.code == LANGUAGE_CODE %}
+                                  selected
+                                {% endif %}>
+                            {{ language.name_local }} ({{ language.code }})
+                        </option>
+                    {% endfor %}
+                </select>
+                <input type="submit" value="Go">
+            </form>
           </li>
         </ul>
       </div>
@@ -120,25 +187,12 @@
   <section id="newsSection">
     <div class="row">
       <div class="col-lg-12 col-md-12">
-        <div class="latest_newsarea"> <span>Yangi Yangiliklar</span>
+        <div class="latest_newsarea"> <span> {% blocktrans %} Yangi Yangiliklar {% endblocktrans %}</span>
           <ul id="ticker01" class="news_sticker">
             {% for news in news_list %}
-            <li><a href="#"><img src="{{ news.image.url }}" alt="">{{ news.title | truncatewords:4 }}</a></li>
+            <li><a href="{{ news.get_absolute_url }}"><img src="{{ news.image.url }}" alt="">{{ news.title | truncatewords:4 }}</a></li>
             {% endfor %}
           </ul>
-          <div class="social_area">
-            <ul class="social_nav">
-<!--              <li class="facebook"><a href="#"></a></li>-->
-              <li class="twitter"><a href="https://x.com/Beksvoi"></a></li>
-              <li class="flickr"><a href="https://www.instagram.com/bek._svoi?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="></a></li>
-<!--              <li class="pinterest"><a href="#"></a></li>-->
-              <li class="googleplus"><a href="https://muydinbaevb@gmail.com"></a></li>
-<!--              <li class="vimeo"><a href="#"></a></li>-->
-              <li class="youtube"><a href="https://www.youtube.com/channel/UCm5zOPOtqEiua73ej4jJnIw"></a></li>
-              <li class="mail"><a href="https://muydinbaevb@gmail.com"></a></li>
-              <li class="telegram"><a href="https://t.me/beksvoi" target="_blank"></a></li>
-            </ul>
-          </div>
         </div>
       </div>
     </div>
@@ -151,7 +205,7 @@
   <div class="row">
   <div class="col-lg-4 col-md-4 col-sm-4">
           <div class="footer_widget wow fadeInLeftBig">
-            <h2>Bloglar saytimiz</h2>
+            <h2> {% blocktrans %} Bloglar saytimiz {% endblocktrans %} </h2>
             <div role="tabpanel" class="tab-pane" id="comments">
                 <ul class="spost_nav">
                   <h2><span></span></h2>
@@ -166,7 +220,7 @@
             <h2>Tag</h2>
             <ul class="tag_nav">
               {% for category in category_list %}
-              <li><a href="{% url 'category_link' category.id %}">{{ category.name }}</a></li>
+              <li><a href="{% url 'category_link' category.id %}">  {{ category.name }} </a></li>
               {% endfor %}
             </ul>
           </div>
@@ -178,10 +232,10 @@
               <li><a href="https://www.instagram.com/bek._svoi?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==">Instagram</a></li>
               <li><a href="https://t.me/beksvoi">Telegram</a></li>
               <li><a href="https://www.youtube.com/channel/UCm5zOPOtqEiua73ej4jJnIw">Youtube</a></li>
-              <li><a href="https://t.me/+Leabp8IdeOg5ZWMy">Telegram kanal</a></li>
+              <li><a href="https://t.me/+Leabp8IdeOg5ZWMy"> {% blocktrans %} Telegram kanal {% endblocktrans %} </a></li>
               <li><a href="https://muydinbaevb@gmail.com">Email</a></li>
-              <li><a href="../contact/">Contact bolimi</a></li>
-              <h6>Tel:+998 93 333 77 77</h6>
+              <li><a href="../contact/"> {% blocktrans %} Contact bolimi {% endblocktrans %} </a></li>
+              <h6>Tel:+998 93 196 56 51</h6>
             </ul>
           </div>
         </div>

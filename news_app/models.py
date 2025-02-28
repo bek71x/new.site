@@ -2,6 +2,7 @@ from django.contrib.auth.models import User
 from django.urls import reverse
 from django.utils import timezone
 from django.db import models
+from ckeditor.fields import RichTextField
 
 
 
@@ -21,7 +22,7 @@ class News(models.Model):
 
     title = models.CharField(max_length=250)
     slug = models.SlugField(max_length=250)
-    body = models.TextField()
+    body = RichTextField()
     image = models.ImageField(upload_to='news/images')
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     publish_time = models.DateTimeField(default=timezone.now)

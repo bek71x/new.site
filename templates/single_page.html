@@ -3,7 +3,7 @@
 {% load static %}
 
 {% load hitcount_tags %}
-
+{% load i18n %}
 {% block content %}
   <section id="contentSection">
     <div class="row">
@@ -11,7 +11,7 @@
         <div class="left_content">
           <div class="single_page">
             <ol class="breadcrumb">
-              <li><a href="{% url 'news_list' %}">Bosh sahifa </a></li>
+              <li><a href="{% url 'news_list' %}">{% blocktrans %} Bosh sahifa {% endblocktrans %}</a></li>
               <li><a href="#">{{ news.category }}</a></li>
               <li class="active">{{ news.title }}</li>
             </ol>
@@ -19,7 +19,7 @@
             <div class="post_commentbox"> <a href="#"></a> <span><i class="fa fa-calendar"></i>{{ news.publish_time }}</span> <a href="#"><i class="fa fa-tags"></i>{{ news.category }}</a>
               <i class="fa fa-eye" aria-hidden="true"></i> {% get_hit_count for news %} </div>
             <div class="single_page_content"> <img class="img-center" src="{{ news.image.url }}" alt="">
-              <blockquote>{{ news.body  }}</blockquote>
+              <blockquote>{{ news.body | safe }}</blockquote>
               {% if request.user.is_superuser %}
               <center>
                 <a href="{% url 'update' news.slug %}"style="background: orange; color: white; border: none; padding: 10px 20px; margin: 10px; cursor: pointer; border-radius: 5px; ;">Update</a> |
@@ -28,17 +28,17 @@
               <ul>
               {% endif %}
 
-                <li>Yangilik {{ news.publish_time }} da qoyildi📌</li>
+                <li>Yangilik {{ news.publish_time }} {% blocktrans %}  da qoyildi📌 {% endblocktrans %}</li>
                 <li>{{ news.category }}</li>
-                <li>{{ news.title }} yangiligi haqida malumotℹ️</li>
+                <li>{{ news.title }} {% blocktrans %} yangiligi haqida malumotℹ️{% endblocktrans %}</li>
               <button class="btn default-btn">{{ news.publish_time }}</button>
               <button class="btn btn-blue">{{ news.category }}</button>
               <button class="btn btn-black">{{ news.title }}</button>
-              <button class="btn default-btn" href="https://t.me/+Leabp8IdeOg5ZWMy">Telegram kanalimizni kuzatib boring</button>
+              <button class="btn default-btn" href="https://t.me/+Leabp8IdeOg5ZWMy">{% blocktrans %} Telegram kanalimizni kuzatib boring {% endblocktrans %}</button>
               <form action="{% url 'news_detail' news.slug %}" method="post">
                 {% csrf_token %}
                 {{ form.as_p }}
-                <button type="submit">Comentariya qoshish➕</button>
+                <button type="submit"> {% blocktrans %} Comentariya qoshish➕ {% endblocktrans %}</button>
               </form>
                 <style>
                   .profile-img {
@@ -67,7 +67,7 @@
                       font-size: 14px;
                   }
                 </style>
-              <h3>Bildirilgan Fikrlar</h3>
+              <h3> {% blocktrans %} Bildirilgan Fikrlar {% endblocktrans %}</h3>
                 <hr>
                 {% for comment in comments %}
                   <div class="comment">
@@ -80,20 +80,16 @@
                     <p>{{ comment.body }}</p>
                   </div>
                     {% empty %}
-                      <p>Hali fikrlar yo‘q.</p>
+                      <p> {% blocktrans %} Hali fikrlar yo‘q. {% endblocktrans %}</p>
                     {% endfor %}
-                  </div>
             <div class="social_link">
               <ul class="sociallink_nav">
-                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                <li><a href="#"><i class="fa fa-pinterest"></i></a></li>
+                <li><a href="https://x.com/Beksvoi"><i class="fa fa-twitter"></i></a></li>
+                <li><a href="https://muydinbaevb@gmail.com"><i class="fa fa-google-plus"></i></a></li>
               </ul>
             </div>
             <div class="related_post">
-              <h2>Oxshash yangiliklar <i class="fa fa-thumbs-o-up"></i></h2>
+              <h2> {% blocktrans %} Oxshash yangiliklar {% endblocktrans %} <i class="fa fa-thumbs-o-up"></i></h2>
               <ul class="spost_nav wow fadeInDown animated">
               {% for news in three_news %}
                 <li>
@@ -104,7 +100,6 @@
               {% endfor %}
               </ul>
             </div>
-          </div>
         </div>
       </div>
       <nav class="nav-slit"> <a class="prev" href="#"> <span class="icon-wrap"><i class="fa fa-angle-left"></i></span>
@@ -116,57 +111,6 @@
           <h3>Bek yangiliklari</h3>
           <img src="{% static 'sponsor/newslogo.webp'%}" alt=""/> </div>
         </a> </nav>
-      <div class="col-lg-4 col-md-4 col-sm-4">
-        <aside class="right_content">
-          <div class="single_sidebar">
-            <ul class="nav nav-tabs" role="tablist">
-              <li role="presentation" class="active"><a href="#category" aria-controls="home" role="tab" data-toggle="tab">Categoriya</a></li>
-              <li role="presentation"><a href="#video" aria-controls="profile" role="tab" data-toggle="tab">Youtube</a></li>
-              <li role="presentation"><a href="#comments" aria-controls="messages" role="tab" data-toggle="tab">Sayt logosi</a></li>
-            </ul>
-            <div class="tab-content">
-              <div role="tabpanel" class="tab-pane active" id="category">
-                <ul>
-                  {% for category in category_list %}
-                  <li class="cat-item"><a href="{% url 'category_link' category.id %}">{{ category.name }}</a></li>
-                  {% endfor %}
-                </ul>
-              </div>
-              <div role="tabpanel" class="tab-pane" id="video">
-                <h2><span></span></h2>
-                <a class="sideAdd" href="https://www.youtube.com/channel/UCm5zOPOtqEiua73ej4jJnIw"><img src="{% static 'sponsor/Youtube_logo.png' %}" alt=""></a> </div>
-                <div class="single_sidebar wow fadeInDown">
-              </div>
-              <div role="tabpanel" class="tab-pane" id="comments">
-                <ul class="spost_nav">
-                  <h2><span></span></h2>
-                  <a class="sideAdd" href=""><img src="{% static 'sponsor/newslogo.webp' %}" alt=""></a>
-              </div>
-                  <div class="single_sidebar wow fadeInDown">
-                </ul>
-              </div>
-            </div>
-          </div>
-          <div class="single_sidebar wow fadeInDown">
-            <h2><span>Homiyimiz</span></h2>
-            <a class="sideAdd" href="https://t.me/beksvoi"><img src="{% static 'sponsor/bek.jpg' %}" alt=""></a> </div>
-          <div class="single_sidebar wow fadeInDown">
-            <h2><span>Category Archive</span></h2>
-            <select class="catgArchive">
-              <option>Categoriya Tanlash</option>
-              {% for category in category_list %}
-              <option>{{ category.name }}</option>
-              {% endfor %}
-            </select>
-          </div>
-          <div class="single_sidebar wow fadeInDown">
-            <h2><span>Linklar</span></h2>
-            <ul>
-              <li><a href="https://t.me/+Leabp8IdeOg5ZWMy">Blog</a></li>
-            </ul>
-          </div>
-        </aside>
-      </div>
     </div>
   </section>
 

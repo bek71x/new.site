@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
-
+{% load i18n %}
 {% block title %}Akkaunt Yaratish{% endblock %}
 
 {% block content %}
@@ -85,14 +85,14 @@
     }
 </style>
 <div class="register-container">
-    <h2>Akkaunt Yaratish</h2>
+    <h2> {% blocktrans %} Akkaunt Yaratish  {% endblocktrans %}</h2>
     <form method="POST" action="">
         {% csrf_token %}
         {{ user_form }}
-        <button type="submit">Akkaunt Yaratish</button>
+        <button type="submit">{% blocktrans %} Akkaunt Yaratish {% endblocktrans %}</button>
     </form>
     <div class="login-redirect">
-        <p>Allaqachon akkauntingiz bormi? <a href="{% url 'login' %}">Tizimga kiring</a>.</p>
+        <p>{% blocktrans %} Allaqachon akkauntingiz bormi? {% endblocktrans %}<a href="{% url 'login' %}">{% blocktrans %}Tizimga kiring {% endblocktrans %}</a>.</p>
     </div>
 </div>
 {% endblock %}

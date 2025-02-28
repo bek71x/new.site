@@ -57,6 +57,8 @@ def news_detail_view(request, news):
         hitcontext['total_hits'] = hits
 
     if request.method == "POST":
+        if not request.user.is_authenticated:
+            return redirect('login')
         form = CommentForm(request.POST)
         if form.is_valid():
             comment = form.save(commit=False)

@@ -1,15 +1,16 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load i18n %}
 {% block title %} Foydalanuvchi ma'lumotlarini o'zgartirish{% endblock title %}
 
 {% block content %}
-<h1>Foydalanuvchi ma'lumotlarini o'zgartirish</h1>
-    <p>Siz o'zingiz haqingizdagi ma'lumotlarni quyidagi forma orqali o'zgartirishingiz mumkin:</p>
+<h1>{% blocktrans %} Foydalanuvchi ma'lumotlarini o'zgartirish {% endblocktrans %}</h1>
+    <p>{% blocktrans %} Siz o'zingiz haqingizdagi ma'lumotlarni quyidagi forma orqali o'zgartirishingiz mumkin {% endblocktrans %}:</p>
 
      <form method="post" enctype="multipart/form-data">{% csrf_token %}
      {{ user_form.as_p }}
      {{ profile_form.as_p }}
-     <button type="submit">O'zgarishlarni saqlash</button>
+     <button type="submit">{% blocktrans %} O'zgarishlarni saqlash{% endblocktrans %}</button>
      </form>
 
 {% endblock content %}

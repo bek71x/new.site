@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
-
+{% load i18n %}
 {% block title %} {{ category.name }} Yangiliklari {% endblock %}
 
 {% block content %}
@@ -12,7 +12,7 @@
                 <div class="single_page">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="{% url 'news_list' %}">Bosh sahifa</a></li>
+                            <li class="breadcrumb-item"><a href="{% url 'news_list' %}"> {% blocktrans %} Bosh sahifa {% endblocktrans %}</a></li>
                             <li class="breadcrumb-item active" aria-current="page">{{ category.name }} yangiliklari</li>
                         </ol>
                     </nav>
@@ -42,7 +42,7 @@
                             {% endfor %}
                         </ul>
                     {% else %}
-                        <p class="no-news">Hozircha bu kategoriyada yangiliklar yo'q. Tez orada yangi kontent qo'shiladi!</p>
+                        <p class="no-news"> {% blocktrans %} Hozircha bu kategoriyada yangiliklar yo'q. Tez orada yangi kontent qo'shiladi! {% endblocktrans %}</p>
                     {% endif %}
                 </div>
             </div>
@@ -52,7 +52,7 @@
                 <div class="single_sidebar">
           </div>
                 <div class="single_sidebar sponsor-section">
-                    <h2><span>Homiyimiz</span></h2>
+                    <h2><span> {% blocktrans %} Homiyimiz {% endblocktrans %} </span></h2>
                     <a class="sponsor-link" href="https://t.me/beksvoi">
                         <img src="{% static 'sponsor/bek.jpg' %}" alt="Sponsor">
                     </a>
